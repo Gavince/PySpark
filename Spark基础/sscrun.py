@@ -1,10 +1,11 @@
-
+import findspark  
+findspark.init()
 from pyspark import SparkContext
 from pyspark.streaming import StreamingContext
 
 # 创建环境
 sc = SparkContext(master="local[2]", appName="NetworkWordCount")
-ssc = StreamingContext(sc, 1)  # 每隔一秒钟监听一次数据
+ssc = StreamingContext(sc, 10)  # 每隔一秒钟监听一次数据
 
 # 监听端口数据
 lines = ssc.socketTextStream("localhost", 9999)

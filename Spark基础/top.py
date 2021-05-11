@@ -1,9 +1,12 @@
+
+import findspark  
+findspark.init()
 from pyspark import SparkContext
 from pyspark.streaming import StreamingContext
 from pyspark.sql.session import SparkSession
 
 def get_countryname(line):
-    country_name = line.strip()
+    country_name = line.strip()  # 消除空格
 
     if country_name == 'usa':
         output = 'USA'
@@ -18,8 +21,8 @@ def get_countryname(line):
 
 # 设置参数
 batch_interval = 1
-window_length = 6*batch_interval
-frquency = 3*batch_interval
+window_length = 6*batch_interval  # 窗口大小
+frquency = 3*batch_interval  # 滑动频率
 
 sc =  sc = SparkContext(master="local[2]", appName="NetworkWordCount")
 ssc = StreamingContext(sc, batch_interval)
